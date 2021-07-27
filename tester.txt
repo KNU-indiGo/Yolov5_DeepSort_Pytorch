@@ -1,0 +1,6 @@
+python3 track.py --source http://127.0.0.1:5500/Streaming/html/movie_player.html --yolo_weights yolov5s.pt --img 640 --show-vid
+
+python3 track.py --source https://www.youtube.com/watch?v=Ca7Meu4z-F4 --yolo_weights yolov5s.pt --img 640 --show-vid
+
+
+
