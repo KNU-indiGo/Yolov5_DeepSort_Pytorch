@@ -167,7 +167,10 @@ def detect(opt):
             # Print time (inference + NMS)
             # print('%sDone. (%.3fs)' % (s, t2 - t1))
             items = cal.toItems(s)
-            print(items)
+            for item in items:
+                if "person" in item:
+                    print(item[0])
+
             # if "" not in items:
             #     print(cal.flame_score(items))
             #     print(cal.importance_score(items))
