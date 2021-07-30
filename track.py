@@ -18,7 +18,7 @@ from pathlib import Path
 import cv2
 import torch
 import torch.backends.cudnn as cudnn
-
+from calculation import Calc
 
 def compute_color_for_id(label):
     """
@@ -31,6 +31,8 @@ def compute_color_for_id(label):
 
 
 def detect(opt):
+    cal = Calc()
+
     out, source, yolo_weights, deep_sort_weights, show_vid, save_vid, save_txt, imgsz, evaluate = \
         opt.output, opt.source, opt.yolo_weights, opt.deep_sort_weights, opt.show_vid, opt.save_vid, \
             opt.save_txt, opt.img_size, opt.evaluate
@@ -115,7 +117,7 @@ def detect(opt):
             else:
                 p, s, im0 = path, '', im0s
 
-            s += '%gx%g ' % img.shape[2:]  # print string
+            # s += '%gx%g ' % img.shape[2:]  # print string
             save_path = str(Path(out) / Path(p).name)
 
             if det is not None and len(det):
@@ -163,7 +165,13 @@ def detect(opt):
                 deepsort.increment_ages()
 
             # Print time (inference + NMS)
-            print('%sDone. (%.3fs)' % (s, t2 - t1))
+            # print('%sDone. (%.3fs)' % (s, t2 - t1))
+            items = cal.toItems(s)
+            print(items)
+            # if "" not in items:
+            #     print(cal.flame_score(items))
+            #     print(cal.importance_score(items))
+
 
             # Stream results
             if show_vid:
